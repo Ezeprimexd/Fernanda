@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fernanda</title>
+  <style>
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(-45deg, #ff6b6b, #feca57, #ff9ff3, #54a0ff, #5f27cd);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .stars, .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .star {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            animation: starTwinkle 4s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+        .particle {
+            position: absolute;
+            font-size: 24px;
+            animation: floatUp 10s linear infinite;
+            opacity: 0;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+        .main-container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 50px 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            margin: 30px auto;
+            max-width: 950px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: heroFloat 6s ease-in-out infinite;
+        }
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .profile-heart {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            animation: heartPulse 2.5s ease-in-out infinite;
+            box-shadow: 0 20px 40px rgba(231, 76, 60, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        .love-title {
+            color: #fff;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            animation: titleGlow 4s ease-in-out infinite alternate;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        @keyframes titleGlow {
+            0% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); }
+            100% { text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 255, 255, 0.6); }
+        }
+        .love-message {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            margin: 40px auto;
+            max-width: 900px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        .love-message h3 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .love-message p {
+            color: #fff;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+        }
+        .photo-gallery {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 40px;
+            padding: 40px;
+            margin: 50px auto;
+            max-width: 700px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+        .gallery-title {
+            color: #fff;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+        }
+        .photo-slider {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            aspect-ratio: 4/5;
+        }
+        .photo-slide {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff6b6b, #feca57, #ff9ff3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+        }
+        .photo-slide.has-image {
+            background: none;
+        }
+        .photo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.6s ease;
+        }
+        .photo-slide:hover img {
+            transform: scale(1.02);
+        }
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 60px;
+            padding: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            z-index: 1000;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        .music-toggle {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.4rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+        }
+        .music-toggle.playing {
+            background: linear-gradient(145deg, #e74c3c, #c0392b);
+            animation: musicPulse 2s ease-in-out infinite;
+        }
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .music-status {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            display: none;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars-container"></div>
+  <div class="floating-particles" id="particles-container"></div>
+
+  <audio autoplay id="background-music" loop muted preload="auto">
+    <source src="lover-rock.mp3.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="music-status" id="music-status">🎵 Iniciando música...</div>
+  <div class="music-control">
+    <button class="music-toggle" id="music-toggle" title="Reproducir música romántica">🎵</button>
+  </div>
+
+  <div class="main-container">
+    <div class="hero-section">
+      <div class="profile-heart">💕</div>
+      <h1 class="love-title">Fernanda</h1>
+    </div>
+
+    <div class="love-message">
+      <h3>💌 Hecho con todo el amor de Eze 💌</h3>
+      <p>Hola Fernanda, sé que todavía no nos conocemos tanto, pero desde que apareciste algo en mí cambió.</p>
+      <p>Me haces sentir bien, me sacas sonrisas y me llenas de alegría con cada cosa que compartimos.</p>
+      <p>No sé qué nos espera más adelante, pero si llegamos a tener algo, de verdad me gustaría que sea bonito y que dure mucho.</p>
+    </div>
+
+    <div class="photo-gallery">
+      <h2 class="gallery-title">📸 Día Especial 📸</h2>
+      <div class="photo-slider">
+        <div class="photo-slide has-image">
+          <img src="https://lh3.googleusercontent.com/d/1vpUvMqIv30ng-S5A53BLkWb4U5k8BTg2" alt="Imagen especial" onerror="this.parentElement.innerHTML='❤️'; this.parentElement.classList.remove('has-image');">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let musicPlaying = false;
+    const backgroundMusic = document.getElementById('background-music');
+    const musicButton = document.getElementById('music-toggle');
+    const musicStatus = document.getElementById('music-status');
+
+    function showMusicStatus(message, duration = 2000) {
+      musicStatus.textContent = message;
+      musicStatus.style.display = 'block';
+      setTimeout(() => musicStatus.style.display = 'none', duration);
+    }
+
+    function toggleMusic() {
+      if (musicPlaying) {
+        backgroundMusic.pause();
+        musicButton.textContent = '🎵';
+        musicButton.classList.remove('playing');
+        showMusicStatus('⏹️ Música pausada');
+      } else {
+        backgroundMusic.muted = false;
+        backgroundMusic.volume = 0.7;
+        backgroundMusic.play().then(() => {
+          musicButton.textContent = '⏸️';
+          musicButton.classList.add('playing');
+          showMusicStatus('🎵 Música reproducida');
+        }).catch(() => {
+          showMusicStatus('❌ Error al reproducir música');
+        });
+      }
+      musicPlaying = !musicPlaying;
+    }
+
+    function createStars() {
+      const container = document.getElementById('stars-container');
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        const size = Math.random() * 3 + 1;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        star.style.animationDelay = Math.random() * 4 + 's';
+        container.appendChild(star);
+      }
+    }
+
+    function createParticle() {
+      const particles = ['💕', '💖', '💗', '✨', '🌹', '🦋', '🌟', '💎', '💝', '🎵'];
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.textContent = particles[Math.floor(Math.random() * particles.length)];
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      document.getElementById('particles-container').appendChild(particle);
+      setTimeout(() => particle.remove(), 10000);
+    }
+
+    function init() {
+      createStars();
+      for (let i = 0; i < 5; i++) setTimeout(() => createParticle(), i * 500);
+      setInterval(createParticle, 2000);
+    }
+
+    document.addEventListener('DOMContentLoaded', init);
+    musicButton.addEventListener('click', toggleMusic);
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden && musicPlaying) {
+        backgroundMusic.pause();
+        musicPlaying = false;
+        musicButton.textContent = '🎵';
+        musicButton.classList.remove('playing');
+      }
+    });
+    document.addEventListener('mousemove', () => {
+      if (Math.random() < 0.02) createParticle();
+    });
+  </script>
+</body>
+</html>
